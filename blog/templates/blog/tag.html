@@ -1,0 +1,63 @@
+
+
+
+{% block main %}
+
+<h1 class="page-header">
+    View Post by Tag:
+    <small>{{ tag.tagName }}</small>
+</h1>
+
+
+{% if latest_posts %}
+	{% for post in latest_posts %}
+		<h2>
+		    <a href="#" onclick="loadPage('{% url 'blog:post' post.id %}')">{{ post.title }}</a>
+		</h2>
+		<p class="lead">
+		    by <a href="index.php">Start Bootstrap</a>
+		</p>
+		<p><span class="glyphicon glyphicon-time"></span> Posted on {{post.published}}</p>
+		
+		<!--
+		<hr>
+		<img class="img-responsive" src="http://placehold.it/900x300" alt="">
+		<hr>
+		-->
+		
+		<p>{{post.body}}</p>
+		<a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+	{% endfor %}
+<hr>
+{% endif %}
+
+
+<!-- Pager -->
+<ul class="pager">
+    <li class="previous pagination">
+        {% if latest_posts.has_previous %}
+            <a href="#" onclick="loadPage('/blog/tag/{{ tag.id }}/?page={{ latest_posts.previous_page_number }}')">&larr; Older</a>
+        {% else %}
+        	<a href="#" class="disabled" display="hidden">&larr; Older</a>
+        {% endif%}
+    </li>
+    <li class="page-number">
+	    <span class="page-current">
+	        Page {{ latest_posts.number }} of {{ latest_posts.paginator.num_pages }}.
+	    </span>
+	</li>
+    <li class="next">
+        {% if latest_posts.has_next %}
+            <a href="#" onclick="loadPage('/blog/tag/{{ tag.id }}/?page={{ latest_posts.next_page_number }}')">Newer &rarr;</a>
+        {% else %}
+        	<a href="#" class="disabled">Newer &rarr;</a>
+        {% endif%}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock %}

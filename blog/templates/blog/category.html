@@ -1,0 +1,46 @@
+{% extends "base_blog.html" %}
+
+{% block main %}
+
+<h1 class="page-header">
+    Category: {{ category.categoryName }}
+    <small>Secondary Text</small>
+</h1>
+
+
+{% if posts_by_catetory %}
+	{% for post in posts_by_catetory %}
+		<h2>
+		    <a href="{% url 'blog:post' post.id %}">{{ post.title }}</a>
+		</h2>
+		<p class="lead">
+		    by <a href="index.php">Start Bootstrap</a>
+		</p>
+		<p><span class="glyphicon glyphicon-time"></span> Posted on {{post.published}}</p>
+		
+		<!--
+		<hr>
+		<img class="img-responsive" src="http://placehold.it/900x300" alt="">
+		<hr>
+		-->
+		
+		<p>{{post.body}}</p>
+		<a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+	{% endfor %}
+<hr>
+{% endif %}
+
+
+<!-- Pager -->
+<ul class="pager">
+    <li class="previous">
+        <a href="#">&larr; Older</a>
+    </li>
+    <li class="next">
+        <a href="#">Newer &rarr;</a>
+    </li>
+</ul>
+
+
+
+{% endblock %}

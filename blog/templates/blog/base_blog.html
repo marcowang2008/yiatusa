@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/custom.css' %}" />
+
+<div class="row" id="sidebar">
+	<div class="col-lg-9">
+		<!-- main content is here -->
+		{% block main %}{% endblock%}
+	</div>
+	
+	<div class="col-md-3">
+		<!-- side bar -->
+		{% include "sidebar.html" %}
+	</div>
+</div>
+
+
+<script>
+function loadPage(path){
+	$.get( path, function( data ) {
+		  $( ".col-lg-9" ).html( data );
+		});
+}
+
+</script>
+
+
+{% endblock %}
